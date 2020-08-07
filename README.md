@@ -7,7 +7,9 @@ v1.1 of the Bittrex API will no longer be supported after 30/9/2020, and I want 
 
 You can see the Bittrex API documentation [here](https://bittrex.github.io/api/v3)
 
-:warning: This repo is in development - Most features are missing, use what exists at your own risk. There may be breaking changes. :warning:
+:warning: This repo is in development :warning:
+
+Most features are missing at the time of writing, use what exists at your own risk. There may be breaking changes.
 
 # Installation
 
