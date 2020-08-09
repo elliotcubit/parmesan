@@ -34,7 +34,7 @@ Code examples will live in the `examples` directory.
 
 :x: `/conditional-orders`
 
-:x: `/currencies`
+:heavy_check_mark: `/currencies`
 
 :x: `/deposits`
 
@@ -42,7 +42,7 @@ Code examples will live in the `examples` directory.
 
 :x: `/orders`
 
-:x: `/ping`
+:heavy_check_mark: `/ping`
 
 :x: `/subaccounts`
 
