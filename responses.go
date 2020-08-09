@@ -4,6 +4,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+// ===== Markets =====
 type Market struct {
 	Symbol              string          `json:"symbol"`
 	BaseCurrencySymbol  string          `json:"baseCurrencySymbol"`
@@ -83,3 +84,25 @@ type Candle struct {
 }
 
 type CandleList []Candle
+
+// ===== Currencies =====
+
+type Currency struct {
+	Symbol string `json:"symbol"`
+	Name string `json:"name"`
+	CoinType string `json:"coinType"`
+	Status string `json:"status"`
+	MinConfirmations int32 `json:"minConfirmations"`
+	Notice string `json:"notice"`
+	TxFee decimal.Decimal `json:"txFee"`
+	LogoUrl string `json:"logoUrl"`
+	ProhibitedIn []string `json:"prohibitedIn"`
+}
+
+type CurrencyList []Currency
+
+
+// ===== Ping =====
+type PingResponse struct {
+	ServerTime int64 `json:"serverTime"`
+}

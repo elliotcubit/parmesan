@@ -5,6 +5,10 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"time"
+	"strconv"
+	"crypto/sha512"
+	"encoding/hex"
 )
 
 const baseUrl = "https://api.bittrex.com/v3"
@@ -25,4 +29,15 @@ func doApiGet(path []string) ([]byte, error) {
 		return nil, err
 	}
 	return body, nil
+}
+
+// Time in unix epoch-millsecond format as a string
+func currentTime() string {
+	return strconv.FormatInt(time.Now().UnixNano() / 1e6, 10)
+}
+
+// Hex representation of a sha512 hash of data
+func hash(data []byte) string {
+	hash := sha512.Sum512(data)
+	return hex.EncodeToString(hash[:])
 }

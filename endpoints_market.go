@@ -5,8 +5,7 @@ import (
 	"fmt"
 )
 
-func GetMarkets() (MarketList, error) {
-	var result MarketList
+func GetMarkets() (result MarketList, err error) {
 	response, err := doApiGet([]string{"markets"})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -14,8 +13,7 @@ func GetMarkets() (MarketList, error) {
 	return result, err
 }
 
-func GetMarketSummaryList() (MarketSummaryList, error) {
-	var result MarketSummaryList
+func GetMarketSummaryList() (result MarketSummaryList, err error) {
 	response, err := doApiGet([]string{"markets", "summaries"})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -23,8 +21,7 @@ func GetMarketSummaryList() (MarketSummaryList, error) {
 	return result, err
 }
 
-func GetMarketTickerList() (MarketTickerList, error) {
-	var result MarketTickerList
+func GetMarketTickerList() (result MarketTickerList, err error) {
 	response, err := doApiGet([]string{"markets", "tickers"})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -32,8 +29,7 @@ func GetMarketTickerList() (MarketTickerList, error) {
 	return result, err
 }
 
-func GetMarketTicker(symbol string) (MarketTicker, error) {
-	var result MarketTicker
+func GetMarketTicker(symbol string) (result MarketTicker, err error) {
 	response, err := doApiGet([]string{"markets", symbol, "ticker"})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -41,8 +37,7 @@ func GetMarketTicker(symbol string) (MarketTicker, error) {
 	return result, err
 }
 
-func GetMarket(symbol string) (Market, error) {
-	var result Market
+func GetMarket(symbol string) (result Market, err error) {
 	response, err := doApiGet([]string{"markets", symbol})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -50,8 +45,7 @@ func GetMarket(symbol string) (Market, error) {
 	return result, err
 }
 
-func GetMarketSummary(symbol string) (MarketSummary, error) {
-	var result MarketSummary
+func GetMarketSummary(symbol string) (result MarketSummary, err error) {
 	response, err := doApiGet([]string{"markets", symbol, "summary"})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -60,8 +54,7 @@ func GetMarketSummary(symbol string) (MarketSummary, error) {
 }
 
 // TODO add depth parameter
-func GetMarketOrderbook(symbol string) (MarketOrderbook, error) {
-	var result MarketOrderbook
+func GetMarketOrderbook(symbol string) (result MarketOrderbook, err error) {
 	response, err := doApiGet([]string{"markets", symbol, "orderbook"})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -69,8 +62,7 @@ func GetMarketOrderbook(symbol string) (MarketOrderbook, error) {
 	return result, err
 }
 
-func GetMarketTrades(symbol string) (MarketTrades, error) {
-	var result MarketTrades
+func GetMarketTrades(symbol string) (result MarketTrades, err error) {
 	response, err := doApiGet([]string{"markets", symbol, "trades"})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -78,8 +70,7 @@ func GetMarketTrades(symbol string) (MarketTrades, error) {
 	return result, err
 }
 
-func GetRecentCandles(symbol, period string) (CandleList, error) {
-	var result CandleList
+func GetRecentCandles(symbol, period string) (result CandleList, err error) {
 	response, err := doApiGet([]string{"markets", symbol, "candles", period, "recent"})
 	if err == nil {
 		json.Unmarshal(response, &result)
@@ -89,8 +80,7 @@ func GetRecentCandles(symbol, period string) (CandleList, error) {
 
 // TODO validate date specifications & throw our own nice error here
 // Date fields are expected to be 1-indexed.
-func GetHistoricalCandles(symbol, period string, year, month, day int) (CandleList, error) {
-	var result CandleList
+func GetHistoricalCandles(symbol, period string, year, month, day int) (result CandleList, err error) {
 	start := fmt.Sprintf("%d/%d/%d", year, month, day)
 	response, err := doApiGet([]string{"markets", symbol, "candles", period, "historical", start})
 	if err == nil {

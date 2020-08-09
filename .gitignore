@@ -1,0 +1,4 @@
+cmd/local/*
+*.swap
+*.txt
+*.json
