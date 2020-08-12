@@ -127,3 +127,13 @@ type Address struct {
 }
 
 type AddressList []Address
+
+// ===== Balances =====
+type Balance struct {
+	CurrencySymbol string `json:"currencySymbol"`
+	Total decimal.Decimal `json:"total"`
+	Available decimal.Decimal `json:"available"`
+	UpdatedAt string `json:"updatedAt"`
+}
+
+type BalanceList []Balance
