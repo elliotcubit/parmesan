@@ -106,3 +106,14 @@ type CurrencyList []Currency
 type PingResponse struct {
 	ServerTime int64 `json:"serverTime"`
 }
+
+// ===== Account =====
+type Account struct {
+	SubaccountId string `json:"subaccountId"`
+	AccountId string `json:"accountId"`
+}
+
+type AccountVolume struct {
+	Updated string `json:"updated"`
+	Volume30Days decimal.Decimal `json:"volume30days"`
+}

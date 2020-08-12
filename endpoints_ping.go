@@ -2,12 +2,10 @@ package parmesan
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
-func Ping() (result PingResponse, err error){
-	fmt.Println(hash([]byte{}))
-  response, err := doApiGet([]string{"ping"})
+func (b *BittrexClient) Ping() (result PingResponse, err error){
+  response, err := b.apiGet([]string{"ping"})
   if err == nil {
     json.Unmarshal(response, &result)
   }
