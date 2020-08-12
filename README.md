@@ -26,7 +26,7 @@ Code examples will live in the `examples` directory.
 
 # Features
 
-:x: `/account`
+:heavy_check_mark: `/account`
 
 :x: `/addresses`
 
