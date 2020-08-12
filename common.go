@@ -10,6 +10,7 @@ import (
 	"crypto/sha512"
 	"crypto/hmac"
 	"encoding/hex"
+	"errors"
 )
 
 const baseUrl = "https://api.bittrex.com/v3"
@@ -48,6 +49,9 @@ func (b *BittrexClient) apiGet(path []string) ([]byte, error) {
 }
 
 func (b *BittrexClient) authApiGet(path []string) ([]byte, error) {
+	if b.apiSecret == "" || b.apiKey == "" {
+		return nil, errors.New("You must provide credentials to use this endpoint.")
+	}
 	trail := strings.Join(path, "/")
 	URL := fmt.Sprintf("%s/%s", baseUrl, trail)
 	reqType := "GET"
