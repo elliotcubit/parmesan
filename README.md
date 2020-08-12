@@ -28,9 +28,9 @@ Code examples will live in the `examples` directory.
 
 :heavy_check_mark: `/account`
 
-:x: `/addresses`
+:heavy_check_mark: `/addresses`
 
-:x: `/balances`
+:heavy_check_mark: `/balances`
 
 :x: `/conditional-orders`
 
