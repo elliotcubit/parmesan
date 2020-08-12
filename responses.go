@@ -117,3 +117,13 @@ type AccountVolume struct {
 	Updated string `json:"updated"`
 	Volume30Days decimal.Decimal `json:"volume30days"`
 }
+
+// ===== Addresses =====
+type Address struct {
+	Status string `json:"status"`
+	CurrencySymbol string `json:"currencySymbol"`
+	CryptoAddress string `json:"cryptoAddress"`
+	CryptoAddressTag string `json:"cryptoAddressTag"`
+}
+
+type AddressList []Address
