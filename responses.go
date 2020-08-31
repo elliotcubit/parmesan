@@ -137,3 +137,59 @@ type Balance struct {
 }
 
 type BalanceList []Balance
+
+// ===== Order Enums =====
+const (
+	OPERAND_LTE = "LTE"
+	OPERAND_GTE = "GTE"
+	STATUS_OPEN = "OPEN"
+	STATUS_COMPLETED = "COMPLETED"
+	STATUS_CANCELLED = "CANCELLED"
+	STATUS_FAILED = "FAILED"
+	DIRECTION_BUY = "BUY"
+	DIRECTION_SELL = "SELL"
+	TYPE_LIMIT = "LIMIT"
+	TYPE_MARKET = "MARKET"
+	TYPE_CEILING_LIMIT = "CEILING_LIMIT"
+	TYPE_CEILING_MARKET = "CEILING_MARKET"
+	PERIOD_GOOD_TILL_CANCELLED = "GOOD_TILL_CANCELLED"
+	PERIOD_IMMEDIATE_OR_CANCEL = "IMMEDIATE_OR_CANCEL"
+	PERIOD_FILL_OR_KILL = "FILL_OR_KILL"
+	PERIOD_POST_ONLY_GOOD_TIL_CANCELLED = "POST_ONLY_GOOD_TIL_CANCELLED"
+	PERIOD_BUY_NOW = "BUY_NOW"
+)
+
+// ===== Conditional Orders =====
+type ConditionalOrder struct {
+	Id string `json:"id"`
+	MarketSymbol string `json:"marketSymbol"`
+	Operand string `json:"operand"`
+	TriggerPrice decimal.Decimal `json:"triggerPrice"`
+	TrailingStopPercent decimal.Decimal `json:"trailingStopPercent"`
+	CreatedOrderId string `json:"createdOrderId"`
+	OrderToCreate NewOrder `json:"orderToCreate"`
+	OrderToCancel NewCancelConditionalOrder `json:"newCancelConditionalOrder"`
+	ClientConditionalOrderId string `json:"clientConditionalOrderId"`
+	Status string `json:"status"`
+	OrderCreationErrorCode string `json:"orderCreationErrorCode"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	ClosedAt string `json:"closedAt"`
+}
+
+type NewOrder struct {
+	MarketSymbol string `json:"marketSymbol"`
+	Direction string `json:"direction"`
+	Type string `json:"type"`
+	Quantity decimal.Decimal `json:"quantity"`
+	Ceiling decimal.Decimal `json:"ceiling"`
+	Limit decimal.Decimal `json:"limit"`
+	TimeInForce string `json:"timeInForce"`
+	ClientOrderId string `json:"clientOrderId"`
+	UseAwards bool `json:"useAwards"`
+}
+
+type NewCancelConditionalOrder struct {
+	Type string `json:"type"`
+	Id string `json:"id"`
+}

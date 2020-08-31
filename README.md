@@ -55,3 +55,11 @@ Code examples will live in the `examples` directory.
 # Contribute
 
 If you'd like to contribute to this project, please be sure to `go fmt` your code before submitting a pull request.
+
+# TODO
+
+Zero values are probably going to be problematic for some responses with optional fields; type wrappers should be used
+
+Dates should be an actual date type instead of leaving it as a string
+
+Testing in a way that won't potentially cost me much money :)
