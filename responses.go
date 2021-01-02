@@ -88,19 +88,18 @@ type CandleList []Candle
 // ===== Currencies =====
 
 type Currency struct {
-	Symbol string `json:"symbol"`
-	Name string `json:"name"`
-	CoinType string `json:"coinType"`
-	Status string `json:"status"`
-	MinConfirmations int32 `json:"minConfirmations"`
-	Notice string `json:"notice"`
-	TxFee decimal.Decimal `json:"txFee"`
-	LogoUrl string `json:"logoUrl"`
-	ProhibitedIn []string `json:"prohibitedIn"`
+	Symbol           string          `json:"symbol"`
+	Name             string          `json:"name"`
+	CoinType         string          `json:"coinType"`
+	Status           string          `json:"status"`
+	MinConfirmations int32           `json:"minConfirmations"`
+	Notice           string          `json:"notice"`
+	TxFee            decimal.Decimal `json:"txFee"`
+	LogoUrl          string          `json:"logoUrl"`
+	ProhibitedIn     []string        `json:"prohibitedIn"`
 }
 
 type CurrencyList []Currency
-
 
 // ===== Ping =====
 type PingResponse struct {
@@ -110,19 +109,19 @@ type PingResponse struct {
 // ===== Account =====
 type Account struct {
 	SubaccountId string `json:"subaccountId"`
-	AccountId string `json:"accountId"`
+	AccountId    string `json:"accountId"`
 }
 
 type AccountVolume struct {
-	Updated string `json:"updated"`
+	Updated      string          `json:"updated"`
 	Volume30Days decimal.Decimal `json:"volume30days"`
 }
 
 // ===== Addresses =====
 type Address struct {
-	Status string `json:"status"`
-	CurrencySymbol string `json:"currencySymbol"`
-	CryptoAddress string `json:"cryptoAddress"`
+	Status           string `json:"status"`
+	CurrencySymbol   string `json:"currencySymbol"`
+	CryptoAddress    string `json:"cryptoAddress"`
 	CryptoAddressTag string `json:"cryptoAddressTag"`
 }
 
@@ -130,68 +129,108 @@ type AddressList []Address
 
 // ===== Balances =====
 type Balance struct {
-	CurrencySymbol string `json:"currencySymbol"`
-	Total decimal.Decimal `json:"total"`
-	Available decimal.Decimal `json:"available"`
-	UpdatedAt string `json:"updatedAt"`
+	CurrencySymbol string          `json:"currencySymbol"`
+	Total          decimal.Decimal `json:"total"`
+	Available      decimal.Decimal `json:"available"`
+	UpdatedAt      string          `json:"updatedAt"`
 }
 
 type BalanceList []Balance
 
 // ===== Order Enums =====
 const (
-	OPERAND_LTE = "LTE"
-	OPERAND_GTE = "GTE"
-	STATUS_OPEN = "OPEN"
-	STATUS_COMPLETED = "COMPLETED"
-	STATUS_CANCELLED = "CANCELLED"
-	STATUS_FAILED = "FAILED"
-	DIRECTION_BUY = "BUY"
-	DIRECTION_SELL = "SELL"
-	TYPE_LIMIT = "LIMIT"
-	TYPE_MARKET = "MARKET"
-	TYPE_CEILING_LIMIT = "CEILING_LIMIT"
-	TYPE_CEILING_MARKET = "CEILING_MARKET"
-	PERIOD_GOOD_TILL_CANCELLED = "GOOD_TILL_CANCELLED"
-	PERIOD_IMMEDIATE_OR_CANCEL = "IMMEDIATE_OR_CANCEL"
-	PERIOD_FILL_OR_KILL = "FILL_OR_KILL"
+	OPERAND_LTE                         = "LTE"
+	OPERAND_GTE                         = "GTE"
+	STATUS_OPEN                         = "OPEN"
+	STATUS_COMPLETED                    = "COMPLETED"
+	STATUS_CANCELLED                    = "CANCELLED"
+	STATUS_FAILED                       = "FAILED"
+	DIRECTION_BUY                       = "BUY"
+	DIRECTION_SELL                      = "SELL"
+	TYPE_LIMIT                          = "LIMIT"
+	TYPE_MARKET                         = "MARKET"
+	TYPE_CEILING_LIMIT                  = "CEILING_LIMIT"
+	TYPE_CEILING_MARKET                 = "CEILING_MARKET"
+	PERIOD_GOOD_TILL_CANCELLED          = "GOOD_TILL_CANCELLED"
+	PERIOD_IMMEDIATE_OR_CANCEL          = "IMMEDIATE_OR_CANCEL"
+	PERIOD_FILL_OR_KILL                 = "FILL_OR_KILL"
 	PERIOD_POST_ONLY_GOOD_TIL_CANCELLED = "POST_ONLY_GOOD_TIL_CANCELLED"
-	PERIOD_BUY_NOW = "BUY_NOW"
+	PERIOD_BUY_NOW                      = "BUY_NOW"
 )
 
 // ===== Conditional Orders =====
 type ConditionalOrder struct {
-	Id string `json:"id"`
-	MarketSymbol string `json:"marketSymbol"`
-	Operand string `json:"operand"`
-	TriggerPrice decimal.Decimal `json:"triggerPrice"`
-	TrailingStopPercent decimal.Decimal `json:"trailingStopPercent"`
-	CreatedOrderId string `json:"createdOrderId"`
-	OrderToCreate NewOrder `json:"orderToCreate"`
-	OrderToCancel NewCancelConditionalOrder `json:"newCancelConditionalOrder"`
-	ClientConditionalOrderId string `json:"clientConditionalOrderId"`
-	Status string `json:"status"`
-	OrderCreationErrorCode string `json:"orderCreationErrorCode"`
-	CreatedAt string `json:"createdAt"`
-	UpdatedAt string `json:"updatedAt"`
-	ClosedAt string `json:"closedAt"`
+	Id                       string                    `json:"id"`
+	MarketSymbol             string                    `json:"marketSymbol"`
+	Operand                  string                    `json:"operand"`
+	TriggerPrice             decimal.Decimal           `json:"triggerPrice"`
+	TrailingStopPercent      decimal.Decimal           `json:"trailingStopPercent"`
+	CreatedOrderId           string                    `json:"createdOrderId"`
+	OrderToCreate            NewOrder                  `json:"orderToCreate"`
+	OrderToCancel            NewCancelConditionalOrder `json:"newCancelConditionalOrder"`
+	ClientConditionalOrderId string                    `json:"clientConditionalOrderId"`
+	Status                   string                    `json:"status"`
+	OrderCreationErrorCode   string                    `json:"orderCreationErrorCode"`
+	CreatedAt                string                    `json:"createdAt"`
+	UpdatedAt                string                    `json:"updatedAt"`
+	ClosedAt                 string                    `json:"closedAt"`
 }
 
 type ConditionalOrderList []ConditionalOrder
 
-type NewOrder struct {
-	MarketSymbol string `json:"marketSymbol"`
-	Direction string `json:"direction"`
-	Type string `json:"type"`
-	Quantity decimal.Decimal `json:"quantity"`
-	Ceiling decimal.Decimal `json:"ceiling"`
-	Limit decimal.Decimal `json:"limit"`
-	TimeInForce string `json:"timeInForce"`
-	ClientOrderId string `json:"clientOrderId"`
-	UseAwards bool `json:"useAwards"`
-}
-
 type NewCancelConditionalOrder struct {
 	Type string `json:"type"`
-	Id string `json:"id"`
+	Id   string `json:"id"`
+}
+
+// ===== Orders =====
+type Order struct {
+	Id            string                    `json:"id"`
+	MarketSymbol  string                    `json:"marketSymbol"`
+	Direction     string                    `json:"direction"`
+	Type          string                    `json:"type"`
+	Quantity      decimal.Decimal           `json:"quantity"`
+	Limit         decimal.Decimal           `json:"limit"`
+	Ceiling       decimal.Decimal           `json:"ceiling"`
+	TimeInForce   string                    `json:"timeInForce"`
+	ClientOrderId string                    `json:"clientOrderId"`
+	FillQuantity  decimal.Decimal           `json:"fillQuantity"`
+	Commission    decimal.Decimal           `json:"commission"`
+	Proceeds      decimal.Decimal           `json:"proceeds"`
+	Status        string                    `json:"status"`
+	CreatedAt     string                    `json:"createdAt"`
+	UpdatedAt     string                    `json:"updatedAt"`
+	ClosedAt      string                    `json:"closedAt"`
+	OrderToCancel NewCancelConditionalOrder `json:"orderToCancel"`
+}
+
+type OrderList []Order
+
+type BulkCancelResult struct {
+	Id         string `json:"id"`
+	StatusCode string `json:"statusCode"`
+	Result     Order
+}
+
+type Execution struct {
+	Id           string          `json:"id"`
+	MarketSymbol string          `json:"marketSymbol"`
+	ExecutedAt   string          `json:"executedAt"`
+	Quantity     decimal.Decimal `json:"quantity"`
+	Rate         decimal.Decimal `json:"rate"`
+	OrderId      string          `json:"orderId"`
+	Commission   decimal.Decimal `json:"commission"`
+	IsTaker      bool            `json:"isTaker"`
+}
+
+type NewOrder struct {
+	MarketSymbol  string          `json:"marketSymbol"`
+	Direction     string          `json:"direction"`
+	Type          string          `json:"type"`
+	Quantity      decimal.Decimal `json:"quantity"`
+	Ceiling       decimal.Decimal `json:"ceiling"`
+	Limit         decimal.Decimal `json:"limit"`
+	TimeInForce   string          `json:"timeInForce"`
+	ClientOrderId string          `json:"clientOrderId"`
+	UseAwards     bool            `json:"useAwards"`
 }
