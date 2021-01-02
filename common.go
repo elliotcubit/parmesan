@@ -48,14 +48,47 @@ func (b *BittrexClient) apiGet(path []string) ([]byte, error) {
 	return body, nil
 }
 
-func (b *BittrexClient) authApiGet(path []string) ([]byte, error) {
+// Convenience methods
+func (b *BittrexClient) authApiGet(path []string, getParameters map[string]interface{}) ([]byte, error) {			
+	return b.authApiGeneric("GET", path, getParameters)
+}
+func (b *BittrexClient) authApiDelete(path []string, getParameters map[string]interface{}) ([]byte, error) {
+	return b.authApiGeneric("POST", path, getParameters)
+}
+
+func (b *BittrexClient) authApiGeneric(typ string, path []string, getParameters map[string]interface{}) ([]byte, error) {
 	if b.apiSecret == "" || b.apiKey == "" {
 		return nil, errors.New("You must provide credentials to use this endpoint.")
 	}
 	trail := strings.Join(path, "/")
-	URL := fmt.Sprintf("%s/%s", baseUrl, trail)
-	reqType := "GET"
-	req, err := http.NewRequest(reqType, URL, nil)
+	param := ""
+	if len(getParameters) > 0 {
+		if typ != "GET" {
+			return nil, fmt.Errorf("GET parameters passed to not a HTTP GET request.")
+		}
+		// Trailing ampersands are supposedly legal
+		param += "?="
+		for key, value := range getParameters {
+			var stringVal string
+			switch argType := value.(type) {
+			case string:
+				stringVal = value.(string)
+			case int:
+				stringVal = fmt.Sprintf("%d", value)
+			// TODO time representation varies sometimes, I think
+			// Use ISO-8601
+			case time.Time:
+				stringVal = value.(time.Time).Format(time.RFC3339)
+			case bool:
+				stringVal = fmt.Sprintf("%v", value)
+			default:
+				return nil, fmt.Errorf("Unsupported query argument type (%v) for value (%v)", argType, value)
+			}
+			param += key+"="+stringVal+"&"
+		}
+	}
+	URL := fmt.Sprintf("%s/%s%s", baseUrl, trail, param)
+	req, err := http.NewRequest(typ, URL, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +96,7 @@ func (b *BittrexClient) authApiGet(path []string) ([]byte, error) {
 	nonce := b.currentTime()
 	contentHash := b.hash([]byte{})
 
-	preSigned := nonce+URL+reqType+contentHash
+	preSigned := nonce+URL+typ+contentHash
 	h := hmac.New(sha512.New, []byte(b.apiSecret))
 	h.Write([]byte(preSigned))
 	apiSignature := hex.EncodeToString(h.Sum(nil))

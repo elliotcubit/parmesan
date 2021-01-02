@@ -5,7 +5,7 @@ import (
 )
 
 func (b *BittrexClient) GetAddresses() (result AddressList, err error) {
-  response, err := b.authApiGet([]string{"addresses"})
+  response, err := b.authApiGet([]string{"addresses"}, nil)
   if err == nil {
     json.Unmarshal(response, &result)
   }
@@ -13,7 +13,7 @@ func (b *BittrexClient) GetAddresses() (result AddressList, err error) {
 }
 
 func (b *BittrexClient) GetAddress(symbol string) (result Address, err error) {
-  response, err := b.authApiGet([]string{"addresses", symbol})
+  response, err := b.authApiGet([]string{"addresses", symbol}, nil)
   if err == nil {
     json.Unmarshal(response, &result)
   }

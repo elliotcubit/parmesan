@@ -177,6 +177,8 @@ type ConditionalOrder struct {
 	ClosedAt string `json:"closedAt"`
 }
 
+type ConditionalOrderList []ConditionalOrder
+
 type NewOrder struct {
 	MarketSymbol string `json:"marketSymbol"`
 	Direction string `json:"direction"`

@@ -5,7 +5,7 @@ import (
 )
 
 func (b *BittrexClient) GetAccount() (result Account, err error){
-  response, err := b.authApiGet([]string{"account"})
+  response, err := b.authApiGet([]string{"account"}, nil)
   if err == nil {
     json.Unmarshal(response, &result)
   }
@@ -13,7 +13,7 @@ func (b *BittrexClient) GetAccount() (result Account, err error){
 }
 
 func (b *BittrexClient) GetAccountVolume() (result AccountVolume, err error){
-  response, err := b.authApiGet([]string{"account", "volume"})
+  response, err := b.authApiGet([]string{"account", "volume"}, nil)
   if err == nil {
     json.Unmarshal(response, &result)
   }

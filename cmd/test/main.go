@@ -10,19 +10,20 @@ func main() {
 }
 
 func Test() {
-	// res, err := parmesan.GetMarkets()
-	// res, err := parmesan.GetMarketSummaries()
-	// res, err := parmesan.GetMarketTickerList()
-	// res, err := parmesan.GetMarketTicker("BTC-USD")
-	// res, err := parmesan.GetMarket("BTC-USD")
-	// res, err := parmesan.GetMarketSummary("BTC-USD")
-	// res, err := parmesan.GetMarketOrderbook("BTC-USD")
-	// res, err := parmesan.GetMarketTrades("BTC-USD")
-	// res, err := parmesan.GetRecentCandles("BTC-USD", parmesan.MinuteOne)
-	// res, err := parmesan.GetHistoricalCandles("BTC-USD", parmesan.HistoricalDayOne, 2020, 1, 1)
-	// res, err := parmesan.GetCurrencies()
-	// res, err := parmesan.GetCurrency("XMR")
-	res, err := parmesan.Ping()
+	b := &parmesan.BittrexClient{}
+	// res, err := b.GetMarkets()
+	// res, err := b.GetMarketSummaries()
+	// res, err := b.GetMarketTickerList()
+	// res, err := b.GetMarketTicker("BTC-USD")
+	// res, err := b.GetMarket("BTC-USD")
+	// res, err := b.GetMarketSummary("BTC-USD")
+	// res, err := b.GetMarketOrderbook("BTC-USD")
+	// res, err := b.GetMarketTrades("BTC-USD")
+	// res, err := b.GetRecentCandles("BTC-USD", parmesan.MinuteOne)
+	// res, err := b.GetHistoricalCandles("BTC-USD", parmesan.HistoricalDayOne, 2020, 1, 1)
+	// res, err := b.GetCurrencies()
+	// res, err := b.GetCurrency("XMR")
+	res, err := b.Ping()
 	if err != nil {
 		fmt.Println("fuck")
 		return
