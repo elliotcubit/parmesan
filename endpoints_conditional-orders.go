@@ -9,11 +9,11 @@ import (
 	Returns the ConditionalOrder that was created
 */
 func (b *BittrexClient) GetConditionalOrder(id string) (result ConditionalOrder, err error) {
-  response, err := b.authApiGet([]string{"conditional-orders", id}, nil)
-  if err == nil {
-    json.Unmarshal(response, &result)
-  }
-  return
+	response, err := b.authApiGet([]string{"conditional-orders", id}, nil)
+	if err == nil {
+		json.Unmarshal(response, &result)
+	}
+	return
 }
 
 /*
@@ -66,7 +66,7 @@ func (b *BittrexClient) GetClosedConditionalOrders(
 	return
 }
 
-func (b *BittrexClient) GetOpenConditionalOrders(marketSymbol string) (result ConditionalOrderList, err error){
+func (b *BittrexClient) GetOpenConditionalOrders(marketSymbol string) (result ConditionalOrderList, err error) {
 	queryArgs := make(map[string]interface{}, 0)
 	if marketSymbol != "" {
 		queryArgs["marketSymbol"] = marketSymbol
