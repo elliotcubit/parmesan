@@ -1,16 +1,16 @@
 package parmesan
 
 import (
+	"crypto/hmac"
+	"crypto/sha512"
+	"encoding/hex"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
-	"crypto/sha512"
-	"crypto/hmac"
-	"encoding/hex"
-	"errors"
 )
 
 const baseUrl = "https://api.bittrex.com/v3"
@@ -21,11 +21,11 @@ type BittrexClient struct {
 	client    http.Client
 }
 
-func New(apiKey, apiSecret string) (*BittrexClient) {
+func New(apiKey, apiSecret string) *BittrexClient {
 	return &BittrexClient{
 		apiKey:    apiKey,
 		apiSecret: apiSecret,
-		client:    http.Client{
+		client: http.Client{
 			Timeout: time.Second * 30,
 		},
 	}
@@ -49,7 +49,7 @@ func (b *BittrexClient) apiGet(path []string) ([]byte, error) {
 }
 
 // Convenience methods
-func (b *BittrexClient) authApiGet(path []string, getParameters map[string]interface{}) ([]byte, error) {			
+func (b *BittrexClient) authApiGet(path []string, getParameters map[string]interface{}) ([]byte, error) {
 	return b.authApiGeneric("GET", path, getParameters)
 }
 func (b *BittrexClient) authApiDelete(path []string, getParameters map[string]interface{}) ([]byte, error) {
@@ -84,7 +84,7 @@ func (b *BittrexClient) authApiGeneric(typ string, path []string, getParameters 
 			default:
 				return nil, fmt.Errorf("Unsupported query argument type (%v) for value (%v)", argType, value)
 			}
-			param += key+"="+stringVal+"&"
+			param += key + "=" + stringVal + "&"
 		}
 	}
 	URL := fmt.Sprintf("%s/%s%s", baseUrl, trail, param)
@@ -96,7 +96,7 @@ func (b *BittrexClient) authApiGeneric(typ string, path []string, getParameters 
 	nonce := b.currentTime()
 	contentHash := b.hash([]byte{})
 
-	preSigned := nonce+URL+typ+contentHash
+	preSigned := nonce + URL + typ + contentHash
 	h := hmac.New(sha512.New, []byte(b.apiSecret))
 	h.Write([]byte(preSigned))
 	apiSignature := hex.EncodeToString(h.Sum(nil))
@@ -122,7 +122,7 @@ func (b *BittrexClient) authApiGeneric(typ string, path []string, getParameters 
 
 // Time in unix epoch-millsecond format as a string
 func (b *BittrexClient) currentTime() string {
-	return strconv.FormatInt(time.Now().UnixNano() / 1e6, 10)
+	return strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 }
 
 // Hex representation of a sha512 hash of data
