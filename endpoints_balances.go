@@ -7,7 +7,7 @@ import (
 func (b *BittrexClient) GetBalances() (result BalanceList, err error) {
 	response, err := b.authApiGet([]string{"balances"}, nil)
 	if err == nil {
-		json.Unmarshal(response, &result)
+		err = json.Unmarshal(response, &result)
 	}
 	return result, err
 }
@@ -15,7 +15,7 @@ func (b *BittrexClient) GetBalances() (result BalanceList, err error) {
 func (b *BittrexClient) GetBalance(symbol string) (result Balance, err error) {
 	response, err := b.authApiGet([]string{"balances", symbol}, nil)
 	if err == nil {
-		json.Unmarshal(response, &result)
+		err = json.Unmarshal(response, &result)
 	}
 	return result, err
 }

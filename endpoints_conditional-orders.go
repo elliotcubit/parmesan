@@ -11,7 +11,7 @@ import (
 func (b *BittrexClient) GetConditionalOrder(id string) (result ConditionalOrder, err error) {
 	response, err := b.authApiGet([]string{"conditional-orders", id}, nil)
 	if err == nil {
-		json.Unmarshal(response, &result)
+		err = json.Unmarshal(response, &result)
 	}
 	return
 }
@@ -22,7 +22,7 @@ func (b *BittrexClient) GetConditionalOrder(id string) (result ConditionalOrder,
 func (b *BittrexClient) DeleteConditionalOrder(id string) (result ConditionalOrder, err error) {
 	response, err := b.authApiDelete([]string{"conditional-orders", id}, nil)
 	if err == nil {
-		json.Unmarshal(response, &result)
+		err = json.Unmarshal(response, &result)
 	}
 	return
 }
@@ -61,7 +61,7 @@ func (b *BittrexClient) GetClosedConditionalOrders(
 	}
 	response, err := b.authApiGet([]string{"conditional-orders", "closed"}, queryArgs)
 	if err == nil {
-		json.Unmarshal(response, &result)
+		err = json.Unmarshal(response, &result)
 	}
 	return
 }
@@ -73,7 +73,7 @@ func (b *BittrexClient) GetOpenConditionalOrders(marketSymbol string) (result Co
 	}
 	response, err := b.authApiGet([]string{"conditional-orders", "open"}, queryArgs)
 	if err == nil {
-		json.Unmarshal(response, &result)
+		err = json.Unmarshal(response, &result)
 	}
 	return
 }

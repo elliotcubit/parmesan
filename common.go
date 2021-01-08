@@ -53,7 +53,7 @@ func (b *BittrexClient) authApiGet(path []string, getParameters map[string]inter
 	return b.authApiGeneric("GET", path, getParameters)
 }
 func (b *BittrexClient) authApiDelete(path []string, getParameters map[string]interface{}) ([]byte, error) {
-	return b.authApiGeneric("POST", path, getParameters)
+	return b.authApiGeneric("DELETE", path, getParameters)
 }
 
 func (b *BittrexClient) authApiGeneric(typ string, path []string, getParameters map[string]interface{}) ([]byte, error) {

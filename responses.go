@@ -206,11 +206,15 @@ type Order struct {
 
 type OrderList []Order
 
-type BulkCancelResult struct {
+type BulkCancelResult []BulkCancelItem
+
+type BulkCancelItem struct {
 	Id         string `json:"id"`
 	StatusCode string `json:"statusCode"`
 	Result     Order
 }
+
+type ExecutionList []Execution
 
 type Execution struct {
 	Id           string          `json:"id"`
@@ -234,3 +238,4 @@ type NewOrder struct {
 	ClientOrderId string          `json:"clientOrderId"`
 	UseAwards     bool            `json:"useAwards"`
 }
+
